@@ -4,6 +4,8 @@ Django Polls is an App inspired by the [Django Documentation Tutorial](https://d
 
 ## Installation
 
+Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+
 ### Clone the Repository
 
 ```
