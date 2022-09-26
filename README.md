@@ -1,4 +1,4 @@
-# Django Blog
+# Django Polls
 
 Django Polls is an App inspired by the [Django Documentation Tutorial](https://docs.djangoproject.com/en/4.1/intro/tutorial01/).
 
