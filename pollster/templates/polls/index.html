@@ -3,19 +3,19 @@
 {% block content %} 
 <h1>Questions</h1>
 {% if latest_question_list %}
-	{% for question in page_obj %}
-	<div class="ui message">
-		<p><span class="ui large text">{{ question.question_text }}</span></p>
+    {% for question in page_obj %}
+    <div class="ui message">
+        <p><span class="ui large text">{{ question.question_text }}</span></p>
         <span class="pub-date"><b>Posted:</b> {{ question.pub_date|date:"M d, Y" }}</span>
         {% if question.vote_set.all %}
             <p><b>Voters:</b> {{ question.vote_set.all|join:", " }}</p>
         {% endif %}
         {% if user.username not in question.vote_set.all|join:", " %}
-		    <a href="{% url 'pollster:detail' question.id %}" class="ui primary button">Vote</a>           
+            <a href="{% url 'pollster:detail' question.id %}" class="ui primary button">Vote</a>           
         {% endif %}
-		<a href="{% url 'pollster:results' question.id %}" class="ui button">Results</a>      
-	</div>
-	{% endfor %}
+        <a href="{% url 'pollster:results' question.id %}" class="ui button">Results</a>      
+    </div>
+    {% endfor %}
     <div class="ui pagination menu">
         {% if page_obj.has_previous %}
             <a class="item" href="?page=1">&laquo; first</a>
@@ -36,6 +36,6 @@
         {% endif %}
     </div>
 {% else %}
-	<p>No polls available</p>
+    <p>No polls available</p>
 {% endif %}
 {% endblock content %}
