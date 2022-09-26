@@ -9,29 +9,29 @@
 
 {% if error_message %}
 <p class="ui error message">
-	<strong>{{ error_message }}</strong>
+    <strong>{{ error_message }}</strong>
 </p>
 {% endif %}
 
 <form action="{% url 'pollster:vote' question.id %}" method="post">
-	{% csrf_token %} 
-	<div class="grouped fields">
-	{% for choice in question.choice_set.all %}
-		<div class="field">
-			<div class="ui radio checkbox">
-				<input
-					type="radio"
-					name="choice"
-					class="form-check-input"
-					id="choice{{ forloop.counter }}"
-					value="{{ choice.id }}"
-				/>
-				<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-			</div>
-		</div>
-	{% endfor %}
-	</div>
-	<div class="ui divider"></div>
-	<input type="submit" value="Vote" class="ui primary button" />
+    {% csrf_token %} 
+    <div class="grouped fields">
+    {% for choice in question.choice_set.all %}
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input
+                    type="radio"
+                    name="choice"
+                    class="form-check-input"
+                    id="choice{{ forloop.counter }}"
+                    value="{{ choice.id }}"
+                />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="ui divider"></div>
+    <input type="submit" value="Vote" class="ui primary button" />
 </form>
 {% endblock content %}

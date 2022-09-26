@@ -1,14 +1,14 @@
 <div class="ui menu">
-	<a class="item" href="/">Django Polls App</a>
-	{% if user.is_authenticated %}
-	<div class="right menu">
-		<a class="item" href="{% url 'accounts:profile' %}"><b>{{ user.username }}</b></a>
-		<a class="item" href="{% url 'accounts:logout' %}">Logout</a>		
-	</div>
-	{% else %}	
-	<div class="right menu">	
-		<a class="item" href="{% url 'accounts:login' %}">Login</a>
-		<a class="item" href="{% url 'accounts:register' %}">Register</a>
-	</div>
-	{% endif %}
+    <a class="item" href="/">Django Polls App</a>
+    {% if user.is_authenticated %}
+    <div class="right menu">
+        <a class="item" href="{% url 'accounts:profile' %}"><b>{{ user.username }}</b></a>
+        <a class="item" href="{% url 'accounts:logout' %}">Logout</a>       
+    </div>
+    {% else %}  
+    <div class="right menu">    
+        <a class="item" href="{% url 'accounts:login' %}">Login</a>
+        <a class="item" href="{% url 'accounts:register' %}">Register</a>
+    </div>
+    {% endif %}
 </div>

@@ -4,73 +4,73 @@
 <h1>{{ question.question_text }}</h1>
 
 <div class="graphic">
-	<canvas id="pie-chart"></canvas>
+    <canvas id="pie-chart"></canvas>
 </div>
 
 {% if user_choice %}
-	<p>You have chosen the option: <b>{{ user_choice }}</b></p>
+    <p>You have chosen the option: <b>{{ user_choice }}</b></p>
 {% else %}
-	<p>You haven't voted yet in this poll</p>
+    <p>You haven't voted yet in this poll</p>
 {% endif %}
 
 <div class="ui middle aligned divided list">
-	{% for choice in question.choice_set.all %}
-	<div class="item {% if user_choice == choice.choice_text %}voted{% endif %}">
-		<div class="right floated content">
-			<div class="ui label">{{ choice.votes }} vote{{ choice.votes | pluralize }}</div>
-		</div>
-		<div class="content">
-			<p><span class="ui large text">{{ choice.choice_text }}</span></p>
-		</div>
-	</div>
-	{% endfor %}
-	<div class="item total">
-		<div class="right floated content">
-			<div class="ui label">{{ total }} vote{{ total | pluralize }}</div>
-		</div>
-		<div class="content">
-			<p><span class="ui large text">Total Votes</span></p>
-		</div>
-	</div>
+    {% for choice in question.choice_set.all %}
+    <div class="item {% if user_choice == choice.choice_text %}voted{% endif %}">
+        <div class="right floated content">
+            <div class="ui label">{{ choice.votes }} vote{{ choice.votes | pluralize }}</div>
+        </div>
+        <div class="content">
+            <p><span class="ui large text">{{ choice.choice_text }}</span></p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="item total">
+        <div class="right floated content">
+            <div class="ui label">{{ total }} vote{{ total | pluralize }}</div>
+        </div>
+        <div class="content">
+            <p><span class="ui large text">Total Votes</span></p>
+        </div>
+    </div>
 </div>
 
 <a class="black ui button" href="{% url 'pollster:index' %}">Back To Polls</a>
 {% if not voted %}
-	<a class="ui primary button" href="{% url 'pollster:detail' question.id %}">Vote</a>
+    <a class="ui primary button" href="{% url 'pollster:detail' question.id %}">Vote</a>
 {% endif %}
 
 <script>
 var config = {
-	type: 'pie',
-	data: {
-		datasets: [{
-			data: {{ data|safe }},
-			backgroundColor: [
-				'#bf0820', '#1a0eb5', '#04b020', '#b09f04', '#db6504', '#04c4c1', '#5804c7'
-			],
-		}],
-			labels: {{ labels|safe }}
-		},
-	options: {
-		responsive: true,
-		maintainAspectRatio: false
-	}
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: {{ data|safe }},
+            backgroundColor: [
+                '#bf0820', '#1a0eb5', '#04b020', '#b09f04', '#db6504', '#04c4c1', '#5804c7'
+            ],
+        }],
+            labels: {{ labels|safe }}
+        },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
 };
 
 window.onload = function() {
-	var ctx = document.getElementById('pie-chart').getContext('2d');
-	var canvas = document.getElementById('pie-chart')
-	window.myPie = new Chart(ctx, config);
-	var polls = config.data.datasets[0].data.length;
-	var zeros = []
-	for (var i = 0; i < polls; i++) {
-		if (config.data.datasets[0].data[i] == 0) {
-			zeros.push(config.data.datasets[0].data[i])
-		}
-	}
-	if (polls == zeros.length) {
-		canvas.style.display = 'none';
-	}
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+    var canvas = document.getElementById('pie-chart')
+    window.myPie = new Chart(ctx, config);
+    var polls = config.data.datasets[0].data.length;
+    var zeros = []
+    for (var i = 0; i < polls; i++) {
+        if (config.data.datasets[0].data[i] == 0) {
+            zeros.push(config.data.datasets[0].data[i])
+        }
+    }
+    if (polls == zeros.length) {
+        canvas.style.display = 'none';
+    }
 };
 </script>
 {% endblock content %}
