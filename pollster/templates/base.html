@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<title>{% block title %}Django Polls App{% endblock %}</title>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+	</head>
+	<body>
+		{% include 'partials/_navbar.html' %}
+		<div class="ui centered grid container">
+			<div class="one column row">
+				<div class="column">
+					{% if messages %}
+					    {% for message in messages %}
+					        <p class="ui success message">
+					            <strong>{{ message }}</strong>
+					        </p>
+					    {% endfor %}
+					{% endif %}
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

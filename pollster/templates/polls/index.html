@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+<h1>Questions</h1>
+{% if latest_question_list %}
+	{% for question in page_obj %}
+	<div class="ui message">
+		<p><span class="ui large text">{{ question.question_text }}</span></p>
+        <span class="pub-date"><b>Posted:</b> {{ question.pub_date|date:"M d, Y" }}</span>
+        {% if question.vote_set.all %}
+            <p><b>Voters:</b> {{ question.vote_set.all|join:", " }}</p>
+        {% endif %}
+        {% if user.username not in question.vote_set.all|join:", " %}
+		    <a href="{% url 'pollster:detail' question.id %}" class="ui primary button">Vote</a>           
+        {% endif %}
+		<a href="{% url 'pollster:results' question.id %}" class="ui button">Results</a>      
+	</div>
+	{% endfor %}
+    <div class="ui pagination menu">
+        {% if page_obj.has_previous %}
+            <a class="item" href="?page=1">&laquo; first</a>
+            <a class="item" href="?page={{ page_obj.previous_page_number }}">&laquo; previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="active item" href="?page={{ num }}">{{ num }}</a>    
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}  
+                <a class="item" href="?page={{ num }}">{{ num }}</a>     
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="item" href="?page={{ page_obj.next_page_number }}">next &raquo;</a>
+            <a class="item" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </div>
+{% else %}
+	<p>No polls available</p>
+{% endif %}
+{% endblock content %}

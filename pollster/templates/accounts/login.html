@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="ui header">Login</h1>
+
+<form action="" method="POST" class="ui form">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="field">
+            <p><span class="ui large text">{{ field.label }}:</span> <br>{{ field }}</p> 
+
+            {% if form.non_field_errors %}
+              <div class="ui red basic label">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="ui divider"></div>
+    <div class="ui buttons">
+        <button type="submit" class="ui primary button">Login</button>
+        <div class="or"></div>
+        <a href="{% url 'accounts:register' %}" class="ui positive button">Register</a>
+    </div>
+</form>
+{% endblock %}

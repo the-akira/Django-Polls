@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="ui header">Register</h1>
+<form action="" method="POST" class="ui form">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="field">
+            <p><span class="ui large text">{{ field.label }}:</span> <br>{{ field }}</p> 
+
+            {% for error in field.errors %}
+                <div class="ui red basic label">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="ui divider"></div>
+    <button class="ui primary button" type="submit">Register</button>
+</form>
+{% endblock %}

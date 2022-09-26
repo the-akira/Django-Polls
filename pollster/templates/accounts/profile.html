@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="ui header">Profile of {{ user.username }}</h1>
+<img class="ui rounded bordered image" src="{{ user.profile.image.url }}">
+<p style="margin-top: 8.5px"><b>Total Votes:</b> {{ total_votes }}</p>
+<p style="margin-top: 2.5px"><b>Email:</b> {{ user.email }}</p>
+
+<form action="" method="POST" class="ui form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 style="margin-top: 0">Update Account Information</h1>
+
+    {% for field in u_form %}
+        <div class="field">
+            <p><span class="ui large text">{{ field.label }}:</span> <br>{{ field }}</p> 
+
+            {% if form.non_field_errors %}
+              <div class="ui red basic label">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% for field in p_form %}
+        <div class="field">
+            <p><span class="ui large text">{{ field.label }}:</span> <br>{{ field }}</p> 
+
+            {% if form.non_field_errors %}
+              <div class="ui red basic label">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="ui divider"></div>
+    <div class="ui buttons">
+        <button type="submit" class="ui primary button">Update</button>
+    </div>
+</form>
+{% endblock %}
