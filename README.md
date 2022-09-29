@@ -17,14 +17,14 @@ git clone https://github.com/the-akira/Django-Polls.git
 Build and run the application
 
 ```
-docker-compose up --build
+docker-compose up
 ```
 
 You can now open your Web Browser and navigate to `http://127.0.0.1:8000/` to see the Web Application.
 
 ### Unit Tests
 
-Accessing the Docker container
+Accessing the **polls** container interactive shell
 
 ```
 docker exec -it polls /bin/sh
@@ -38,13 +38,13 @@ python manage.py test
 
 ### Database
 
-Accessing the Docker container
+Accessing the **polls_db_1** container interactive shell
 
 ```
 docker exec -it polls_db_1 /bin/sh
 ```
 
-Starting the command line prompt
+Starting the SQL command line prompt
 
 ```
 psql -U postgres
