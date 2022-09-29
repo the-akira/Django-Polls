@@ -24,7 +24,7 @@ You can now open your Web Browser and navigate to `http://127.0.0.1:8000/` to se
 
 ### Unit Tests
 
-Accessing the **polls** container interactive shell
+Accessing **polls** container interactive shell
 
 ```
 docker exec -it polls /bin/sh
@@ -38,7 +38,7 @@ python manage.py test
 
 ### Database
 
-Accessing the **polls_db_1** container interactive shell
+Accessing **polls_db_1** container interactive shell
 
 ```
 docker exec -it polls_db_1 /bin/sh
